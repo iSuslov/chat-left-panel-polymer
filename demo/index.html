@@ -23,13 +23,13 @@
     <h3>Basic chat-element demo</h3>
     <demo-snippet>
         <template>
-            <div style="position: relative; height: 500px">
+            <div style="position: relative; height: 400px">
                 <!--Element fits into any relative container-->
                 <chat-element id="chat"></chat-element>
                 <script>
                     var chat = document.getElementById("chat");
                     chat.selectedUserId = "";
-                    chat.filter = "";
+                    chat.filterString = "";
                     chat.users = [
                         {
                             "UserId": '1',
