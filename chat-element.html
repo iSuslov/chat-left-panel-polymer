@@ -1,0 +1,101 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../iron-input/iron-input.html">
+
+
+<dom-module id="chat-element">
+    <template>
+        <style>
+            :host {
+                display: block;
+                font-family: "Lucida Grande", "Tahoma";
+                background-color: #fff;
+                @apply --layout-fit;
+                @apply --layout-vertical;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            .search-container {
+                padding: 10px;
+            }
+            .search-container iron-input, .search-container input{
+                width: 100%;
+            }
+            .search-container input{
+                border: none;
+                border-radius: 3px;
+                height: 22px;
+                background-color: #f1f1f1;
+                opacity: 0.5;
+                text-align: center;
+                outline: none;
+            }
+
+            .dialog-container {
+                @apply --layout-flex;
+            }
+
+        </style>
+
+        <div class="search-container">
+            <iron-input>
+                <input placeholder="Search for people and groups" value="{{filterString::input}}">
+            </iron-input>
+        </div>
+        <div class="dialog-container">
+            <template is="dom-repeat" items="[[users]]" filter="{{computeFilter(filterString)}}">
+                <chat-item on-click="onItemClick" data="[[item]]" selected="[[isSelected(selectedUserId, item.UserId)]]"></chat-item>
+            </template>
+        </div>
+
+
+    </template>
+
+    <script>
+        /**
+         * `chat-element`
+         *
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class ChatElement extends Polymer.Element {
+            static get is() {
+                return 'chat-element';
+            }
+
+            static get properties() {
+                return {
+                    users: Array,
+                    selectedUserId: String,
+                    filterString: String
+                }
+
+            }
+            constructor(){
+                super();
+
+            }
+            isSelected(selectedId, id){
+                return !!selectedId && (selectedId === id);
+            }
+            onItemClick(e){
+                this.selectedUserId = e.model.item.UserId
+            }
+            computeFilter(filterString){
+                return item => {
+                    if (!this.filterString) {
+                        return true
+                    }
+                    return item.Name.indexOf(filterString) >= 0;
+                }
+            }
+        }
+
+        window.customElements.define(ChatElement.is, ChatElement);
+    </script>
+</dom-module>

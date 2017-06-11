@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Chat demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../chat-item.html">
+    <link rel="import" href="../chat-element.html">
+
+    <custom-style>
+        <style is="custom-style" include="demo-pages-shared-styles">
+        </style>
+    </custom-style>
+</head>
+<body>
+<div class="vertical-section-container centered">
+    <h3>Basic chat-element demo</h3>
+    <demo-snippet>
+        <template>
+            <div style="position: relative; height: 500px">
+                <!--Element fits into any relative container-->
+                <chat-element id="chat"></chat-element>
+                <script>
+                    var chat = document.getElementById("chat");
+                    chat.selectedUserId = "";
+                    chat.filter = "";
+                    chat.users = [
+                        {
+                            "UserId": '1',
+                            "Picture": "https://www.shareicon.net/data/128x128/2015/09/24/106430_man_512x512.png",
+                            "Name": "Andre Hegge",
+                            "LastMessage": "Hi, We really like your profile, and your cover letter, but before we start",
+                            "IsLastMessageSeen": true,
+                            "LastActivityDateTime": 1497195227490
+                        },
+                        {
+                            "UserId": '2',
+                            "Picture":"http://www.iconsfind.com/wp-content/uploads/2015/08/20150831_55e46ad551392.png",
+                            "Name": "Alex More",
+                            "LastMessage": "A dialog is a small window that prompts the user to make a decision or enter additional information.",
+                            "IsLastMessageSeen": true,
+                            "LastActivityDateTime": 1497194226490
+                        },
+                        {
+                            "UserId": '3',
+                            "Picture": "http://i.imgur.com/HQ3YU7n.gif",
+                            "Name": "Some Person",
+                            "LastMessage": "is normally used for modal events that require users to take an action before they can proceed.",
+                            "IsLastMessageSeen": true,
+                            "LastActivityDateTime": 1497193225490
+                        },
+                        {
+                            "UserId": '4',
+                            "Picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8SO68-LJq2RJdIs7EQAPP1OFbO7Fo50YO_2TLx11iNK8pdYLO",
+                            "Name": "Bugs Bunny",
+                            "LastMessage": "is an animated cartoon character; created in 1940 by Leon Schlesinger Productions (later Warner Bros. Cartoons) and voiced originally by",
+                            "IsLastMessageSeen": true,
+                            "LastActivityDateTime": 1497192124490
+                        },
+                        {
+                            "UserId": '5',
+                            "Picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRioI167Wlb7-QWANg_imcmVzne8O8IFCdjUMmqJo3eXdxQFZdnQA",
+                            "Name": "Eugene Soul",
+                            "LastMessage": "Butterflies are insects in the macrolepidopteran clade Rhopalocera from the order Lepidoptera, which also includes moths.",
+                            "IsLastMessageSeen": true,
+                            "LastActivityDateTime": 1497191223490
+                        },
+                        {
+                            "UserId": '6',
+                            "Picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyVIjXl8Rl6YmLQziLCEHQOQ0jWQhkrPWzgPQ2MCdPps4_eS4i7A",
+                            "Name": "Dom Jolly",
+                            "LastMessage": "This fun article talks all about how long butterflies live. Butterflies are pretty interesting!",
+                            "IsLastMessageSeen": true,
+                            "LastActivityDateTime": 1497189222490
+                        },
+                        {
+                            "UserId": '7',
+                            "Picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmVcHIsK0HVp_a7s5X9iAinxbAYIAu-SHatPB0fajoRNz7KuIU",
+                            "Name": "John Doe",
+                            "LastMessage": "This compilation includes some of the all-time best classic Bugs Bunny Cartoons from the Golden-Era ",
+                            "IsLastMessageSeen": true,
+                            "LastActivityDateTime": 1497188221490
+                        }
+                    ]
+                </script>
+            </div>
+        </template>
+    </demo-snippet>
+</div>
+<div class="vertical-section-container centered">
+    <h3>Basic chat-item demo</h3>
+    <demo-snippet>
+        <template>
+            <chat-item id="chatItem"></chat-item>
+            <script>
+                document.getElementById("chatItem").data = {
+                    "UserId": '1eef12a12d19',
+                    "Picture": "https://www.shareicon.net/data/128x128/2015/09/24/106430_man_512x512.png",
+                    "Name": "Andre Hegge",
+                    "LastMessage": "Hi, We really like your profile, and your cover letter, but before we start",
+                    "IsLastMessageSeen": true,
+                    "LastActivityDateTime": 1497195227490
+                }
+            </script>
+        </template>
+    </demo-snippet>
+</div>
+<script>
+
+</script>
+</body>
+</html>

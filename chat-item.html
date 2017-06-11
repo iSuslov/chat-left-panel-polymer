@@ -1,0 +1,166 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+
+
+<dom-module id="chat-item">
+    <template>
+        <style>
+            :host {
+                display: block;
+                padding: 5px;
+                background-color: #fff;
+                font-family: "Lucida Grande", "Tahoma";
+            }
+            :host([selected]){
+                background-color: #fafafa;
+            }
+            :host([selected]) .actions{
+                display: block;
+            }
+
+            .wrapper {
+                position: relative;
+                width: 100%;
+                height: 50px;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            .pic-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 50px;
+                height: 50px;
+
+                padding: 5px;
+            }
+
+            .pic-container img {
+                width: 100%;
+                border-radius: 100px;
+            }
+
+            .pic-container .signal {
+                width: 10px;
+                height: 10px;
+                border-radius: 100px;
+                background-color: #2a8bf4;
+                position: absolute;
+                bottom: 5px;
+                right: 7px;
+                border: 1px solid #fff;
+            }
+
+            .main-container {
+                padding: 5px 5px 5px 55px;
+            }
+
+            .ellipsis {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            .title {
+                position: relative;
+                color: #333;
+                font-size: 12px;
+                margin-top: 5px;
+                padding-right: 55px;
+            }
+
+            .msg, .time {
+                color: #aaa;
+                font-size: 11px;
+            }
+
+            .msg {
+                margin-top: 2px;
+                padding-right: 20px;
+            }
+
+            .time {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            .actions:hover {
+                opacity: 0.4;
+            }
+
+            .actions {
+                position: absolute;
+                right: 0px;
+                bottom: 6px;
+                opacity: 0.2;
+                display: none;
+
+                --paper-icon-button: {
+                    width: 20px;
+                    height: 20px;
+                    padding: 1px;
+                }
+            }
+        </style>
+        <div class="wrapper">
+            <div class="pic-container">
+                <img src="[[data.Picture]]">
+                <div class="signal"></div>
+            </div>
+            <div class="main-container">
+                <div class="title ellipsis">[[data.Name]]
+                    <div class="time">[[convertTime(data.LastActivityDateTime)]]</div>
+                </div>
+                <div class="msg ellipsis">[[data.LastMessage]]</div>
+                <paper-icon-button class="actions" icon="icons:settings"></paper-icon-button>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        /**
+         * `chat-element`
+         *
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class ChatItem extends Polymer.Element {
+            static get is() {
+                return 'chat-item';
+            }
+
+            static get properties() {
+                return {
+                    data: Object,
+                    selected:{
+                        type:Boolean,
+                        reflectToAttribute: true,
+                        value: false
+                    }
+                };
+            }
+
+            convertTime(timestamp) {
+                var date = new Date(timestamp);
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                var ampm = hours >= 12 ? 'pm' : 'am';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                var strTime = hours + ':' + minutes + ampm;
+                return strTime;
+
+            }
+        }
+
+        window.customElements.define(ChatItem.is, ChatItem);
+    </script>
+</dom-module>
