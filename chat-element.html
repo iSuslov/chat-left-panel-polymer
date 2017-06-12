@@ -70,8 +70,14 @@
 
             properties: {
                 users: Array,
-                selectedUserId: String,
-                filterString: String
+                selectedUserId: {
+                    type: String,
+                    notify: true
+                },
+                filterString: {
+                    type: String,
+                    notify: true
+                }
             },
             _isSelected: function (selectedId, id) {
                 return !!selectedId && (selectedId === id);
