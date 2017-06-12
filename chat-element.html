@@ -55,8 +55,8 @@
         </div>
         <div class="dialog-container">
             <template is="dom-repeat" items="[[users]]" filter="{{_computeFilter(filterString)}}">
-                <chat-item on-click="_onItemClick" data="[[item]]"
-                           selected="[[_isSelected(selectedUserId, item.UserId)]]"></chat-item>
+                <chat-item on-tap="_onItemClick" data="[[item]]"
+                           selected="[[_isSelected(selectedUserId, item.ObId)]]"></chat-item>
             </template>
         </div>
 
@@ -83,7 +83,7 @@
                 return !!selectedId && (selectedId === id);
             },
             _onItemClick: function (e) {
-                this.selectedUserId = e.model.item.UserId
+                this.selectedUserId = e.model.item.ObId
             },
             _computeFilter: function (filterString) {
                 return function(item) {
