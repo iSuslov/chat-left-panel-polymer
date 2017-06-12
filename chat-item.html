@@ -116,7 +116,7 @@
                 <div class="title ellipsis">[[data.Name]]
                     <div class="time">[[convertTime(data.LastActivityDateTime)]]</div>
                 </div>
-                <div class="msg ellipsis">[[data.LastMessage]]</div>
+                <div class="msg ellipsis" hidden$="[[!data.IsLastMessageSeen]]">[[data.LastMessage]]</div>
                 <paper-icon-button class="actions" icon="icons:settings"></paper-icon-button>
             </div>
         </div>
