@@ -1,7 +1,12 @@
-<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../iron-input/iron-input.html">
+<!--
+`chat-element`
 
+
+@demo demo/index.html
+-->
 
 <dom-module id="chat-element">
     <template>
@@ -10,8 +15,8 @@
                 display: block;
                 font-family: "Lucida Grande", "Tahoma";
                 background-color: #fff;
-                @apply --layout-fit;
-                @apply --layout-vertical;
+                @apply(--layout-fit);
+                @apply(--layout-vertical);
             }
 
             * {
@@ -21,10 +26,12 @@
             .search-container {
                 padding: 10px;
             }
-            .search-container iron-input, .search-container input{
+
+            .search-container iron-input, .search-container input {
                 width: 100%;
             }
-            .search-container input{
+
+            .search-container input {
                 border: none;
                 border-radius: 3px;
                 height: 22px;
@@ -35,7 +42,7 @@
             }
 
             .dialog-container {
-                @apply --layout-flex;
+                @apply(--layout-flex);
                 overflow-y: auto;
             }
 
@@ -47,8 +54,9 @@
             </iron-input>
         </div>
         <div class="dialog-container">
-            <template is="dom-repeat" items="[[users]]" filter="{{computeFilter(filterString)}}">
-                <chat-item on-click="onItemClick" data="[[item]]" selected="[[isSelected(selectedUserId, item.UserId)]]"></chat-item>
+            <template is="dom-repeat" items="[[users]]" filter="{{_computeFilter(filterString)}}">
+                <chat-item on-click="_onItemClick" data="[[item]]"
+                           selected="[[_isSelected(selectedUserId, item.UserId)]]"></chat-item>
             </template>
         </div>
 
@@ -56,47 +64,30 @@
     </template>
 
     <script>
-        /**
-         * `chat-element`
-         *
-         *
-         * @customElement
-         * @polymer
-         * @demo demo/index.html
-         */
-        class ChatElement extends Polymer.Element {
-            static get is() {
-                return 'chat-element';
-            }
+        Polymer({
 
-            static get properties() {
-                return {
-                    users: Array,
-                    selectedUserId: String,
-                    filterString: String
-                }
+            is: 'chat-element',
 
-            }
-            constructor(){
-                super();
-
-            }
-            isSelected(selectedId, id){
+            properties: {
+                users: Array,
+                selectedUserId: String,
+                filterString: String
+            },
+            _isSelected: function (selectedId, id) {
                 return !!selectedId && (selectedId === id);
-            }
-            onItemClick(e){
+            },
+            _onItemClick: function (e) {
                 this.selectedUserId = e.model.item.UserId
-            }
-            computeFilter(filterString){
-                return item => {
+            },
+            _computeFilter: function (filterString) {
+                return function(item) {
                     if (!this.filterString) {
                         return true
                     }
                     return item.Name.indexOf(filterString) >= 0;
                 }
             }
-        }
 
-        window.customElements.define(ChatElement.is, ChatElement);
+        });
     </script>
 </dom-module>

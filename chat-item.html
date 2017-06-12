@@ -1,7 +1,12 @@
-<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
+<!--
+`chat-element`
 
+
+@demo demo/index.html
+-->
 
 <dom-module id="chat-item">
     <template>
@@ -12,10 +17,12 @@
                 background-color: #fff;
                 font-family: "Lucida Grande", "Tahoma";
             }
-            :host([selected]){
+
+            :host([selected]) {
                 background-color: #fafafa;
             }
-            :host([selected]) .actions{
+
+            :host([selected]) .actions {
                 display: block;
             }
 
@@ -123,31 +130,20 @@
     </template>
 
     <script>
-        /**
-         * `chat-element`
-         *
-         *
-         * @customElement
-         * @polymer
-         * @demo demo/index.html
-         */
-        class ChatItem extends Polymer.Element {
-            static get is() {
-                return 'chat-item';
-            }
+        Polymer({
 
-            static get properties() {
-                return {
-                    data: Object,
-                    selected:{
-                        type:Boolean,
-                        reflectToAttribute: true,
-                        value: false
-                    }
-                };
-            }
+            is: 'chat-item',
 
-            convertTime(timestamp) {
+            properties: {
+                data: Object,
+                selected: {
+                    type: Boolean,
+                    reflectToAttribute: true,
+                    value: false
+                }
+            },
+
+            convertTime: function(timestamp) {
                 var date = new Date(timestamp);
                 var hours = date.getHours();
                 var minutes = date.getMinutes();
@@ -157,10 +153,8 @@
                 minutes = minutes < 10 ? '0' + minutes : minutes;
                 var strTime = hours + ':' + minutes + ampm;
                 return strTime;
-
             }
-        }
 
-        window.customElements.define(ChatItem.is, ChatItem);
+        });
     </script>
 </dom-module>
